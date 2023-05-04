@@ -2,6 +2,6 @@ a = int(input())
 b = int(input())
 
 print(a*(b%10))
-print(a*int((int(b)-int(b/100)*100)/10))
-print(a*int(b/100))
+print(a*(b%100//10))
+print(a*(b//100))
 print(a*b)
