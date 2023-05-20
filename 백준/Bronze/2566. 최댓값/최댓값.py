@@ -1,11 +1,6 @@
 # 2566
 
-arr = [[0] * 9 for _ in range(9)]
-
-for i in range(9):
-    row = input().split()
-    for j in range(9):
-        arr[i][j] = row[j]
+arr = [list(map(int, input().split())) for _ in range(9)]
 
 max_val = 0
 max_col = 0
@@ -18,7 +13,8 @@ for i in range(9):
             max_col = i
             max_row = j
 
-print(str(max_val) + '\n' + str(int(max_col)+1) + ' ' + str(int(max_row)+1))
+print(max_val)
+print(max_col+1, max_row+1)
 
 
 
