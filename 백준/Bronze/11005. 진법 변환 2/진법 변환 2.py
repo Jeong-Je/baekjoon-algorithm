@@ -1,11 +1,15 @@
 # 11005
 
-arr = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-ans = ''
 n, b = map(int, input().split())
 
+result = []
 while n:
-    ans += arr[n%b]
+    if n % b >= 10:
+        result.append(chr(n%b+55))
+    else:
+        result.append(n%b)
     n //= b
 
-print(ans[::-1])
+
+for i in reversed(result):
+    print(i, end='')
