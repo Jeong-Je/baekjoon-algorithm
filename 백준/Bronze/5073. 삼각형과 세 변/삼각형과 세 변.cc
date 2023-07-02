@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <algorithm>
+
 using namespace std;
 
 int main() {
@@ -9,7 +10,7 @@ int main() {
 	while (true) {
 		cin >> s1 >> s2 >> s3;
 		int sum = s1 + s2 + s3;
-		if (s1 == 0 && s2 == 0 && s3 == 0)
+		if (sum == 0)
 			break;
 		else if (sum  <= 2*max({ s1, s2, s3 }))
 			cout << "Invalid" << "\n";
