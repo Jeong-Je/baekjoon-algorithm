@@ -22,9 +22,11 @@ int main() {
 	int start = 0;
 	int end = n - 1;
 
-	int min = 2000000000;
-	
+	int min = abs(v.at(start) + v.at(end));
+
 	vector<int> result(2);
+	result[0] = v.at(start);
+	result[1] = v.at(end);
 
 	while (start < end) {
 		int sum = v.at(start) + v.at(end);
