@@ -21,8 +21,8 @@ int main(){
         cin >> prices[i];
     }
     
-    int result = 0;
-    int min_prices = prices[0];
+    long long result = 0;
+    long long min_prices = prices[0];
     
     for(int i=0;i<N-1;i++) {
         if(i==0){
