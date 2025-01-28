@@ -21,13 +21,23 @@ int main(){
         cin >> prices[i];
     }
     
-    int point_17 = 0;
+    int result = 0;
+    int min_prices = prices[0];
     
-    for(int i=0;i<N-1;i++){
-        point_17 += distances[i];
+    for(int i=0;i<N-1;i++) {
+        if(i==0){
+            result += prices[0] * distances[0];
+        } else {
+            if(min_prices > prices[i]) {
+                min_prices = prices[i];
+                result += min_prices * distances[i];
+            } else {
+                result += min_prices * distances[i];
+            }
+        }
     }
     
+    cout << result;
     
-    cout << point_17;
     return 0;
 }
