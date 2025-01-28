@@ -8,7 +8,7 @@ int main(){
     cin.tie(NULL); cout.tie(NULL);
     
     string str;
-    int cnt[27][2001] = {};
+    int cnt[27][200001] = {};
     
     cin >> str;
     
