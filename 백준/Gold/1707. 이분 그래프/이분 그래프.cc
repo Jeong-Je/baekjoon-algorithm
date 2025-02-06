@@ -1,82 +1,69 @@
-// BOJ 1707 (https://www.acmicpc.net/problem/1707)
 #include <iostream>
 #include <vector>
-#include <queue>
 
 using namespace std;
 
-int K, V, E;
-static vector<vector<int>> vec;
-static vector<int> visited;
+void DFS(int node);
+static vector<vector<int>> A;
+static vector<int> check;
+static vector<bool> visited;
+static bool IsEven;
 
-#define RED 1
-#define BLUE 2
-
-void BFS(int node);
-bool isBipartiteGraph();
-
-int main()
-{
-    cin >> K;
+int main(){
+    ios::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
     
-    for(int i=0;i<K;i++){
+    int N;
+    cin >> N;
+    
+    for(int t=0;t<N;t++){
+        int V, E;
         cin >> V >> E;
-        vec.resize(V+1);
-        visited = vector<int>(V+1, false);
-        for(int j=0;j<E;j++){
-            int s, e;
-            cin >> s >> e;
-            vec[s].push_back(e);
-            vec[e].push_back(s);
+        A.resize(V+1);
+        visited.resize(V+1);
+        check.resize(V+1);
+        IsEven = true;
+        
+        for(int i=0;i<E;i++){
+            int S, E;
+            cin >> S >> E;
+            A[S].push_back(E);
+            A[E].push_back(S);
         }
+        
         for(int i=1;i<=V;i++){
-            if(!visited[i]) BFS(i);
+            if(IsEven){
+                DFS(i);
+            } else {
+                break;
+            }
         }
-        if(isBipartiteGraph()) {
+        
+        if(IsEven){
             cout << "YES\n";
         } else {
             cout << "NO\n";
         }
         
         for(int i=0;i<=V;i++){
-            vec[i].clear();
-        }
-    }
-    
-    return 0;
-}
-
-void BFS(int node) {
-    int color = RED;
-    visited[node] = color;
-    queue<int> que;
-    que.push(node);
-    
-    while(!que.empty()){
-        int now = que.front();
-        que.pop();
-        if(visited[now] == RED) {
-            color = BLUE;
-        } else {
-            color = RED;
-        }
-        for(int i=0;i<vec[now].size();i++){
-            int next = vec[now][i];
-            if(!visited[next]){
-                visited[next] = color;
-                que.push(next);           
-            }
+            A[i].clear();
+            visited[i] = false;
+            check[i] = 0;
         }
     }
 }
 
-bool isBipartiteGraph() {
-    for(int i=1;i<=V;i++){
-        for(int j=0;j<vec[i].size();j++){
-            int next = vec[i][j];
-            if(visited[i] == visited[next]) return false;
+void DFS(int node){
+    visited[node] = true;
+    
+    
+    for(int i: A[node]) {
+        if(!visited[i]) {
+            check[i] = (check[node] +1) % 2;
+            DFS(i);
+        } else if(check[node] == check[i]) {
+            IsEven = false;
         }
     }
-    
-    return true;
 }
