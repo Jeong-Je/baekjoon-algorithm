@@ -60,7 +60,7 @@ void unions(int a, int b){
     b = find(b);
     
     if(a!=b){
-        parent[b] = a;
+        parent[a] = b;
     }
 }
 int find(int a) {
