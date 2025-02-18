@@ -64,8 +64,7 @@ while(!queue.empty()){
         if(D[next] == 0) {
             queue.push(next);
         }
-    }![Uploading ㅇ.svg…]()
-
+    }
 }
 ```
 ***
