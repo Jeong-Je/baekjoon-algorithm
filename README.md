@@ -72,3 +72,6 @@ while(!queue.empty()){
 ### 벨만 포드(bellman-ford)
 ### 플로이드 워셜(floyd-warshall)
 ### 최소 신장 트리(minimum spanning tree)
+***
+## 트리
+### 트라이(trie)
