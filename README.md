@@ -75,3 +75,4 @@ while(!queue.empty()){
 ***
 ## 트리
 ### 트라이(trie)
+### 이진트리(binary tree)
