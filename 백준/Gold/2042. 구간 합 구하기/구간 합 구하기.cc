@@ -29,10 +29,10 @@ int main(){
     
     tree.resize(treeSize+1);
     
-    int leftStartIndex = treeSize / 2 -1;
+    int leftStartIndex = treeSize / 2;
     
     
-    for(int i=leftStartIndex+1;i<=leftStartIndex+N;i++){
+    for(int i=leftStartIndex;i<leftStartIndex+N;i++){
         cin >> tree[i];
     }
 
@@ -43,11 +43,11 @@ int main(){
         cin >> a >> s >> e;
         
         if(a==1) { // 값 교체
-            changeNode(leftStartIndex+s, e);
+            changeNode(leftStartIndex+s-1, e);
 
         } else { // 구간 합 출력
-            s += leftStartIndex;
-            e += leftStartIndex;
+            s += leftStartIndex-1;
+            e += leftStartIndex-1;
             cout << getSum(s, e) << "\n";
         }
     }
