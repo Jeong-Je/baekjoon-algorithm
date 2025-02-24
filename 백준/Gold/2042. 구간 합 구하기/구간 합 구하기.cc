@@ -80,7 +80,7 @@ void setTree(int i){
 void changeNode(int index, long val){
     long diff = val - tree[index];
     
-    while(index > 0) {
+    while(index) {
         tree[index] += diff;
         index /= 2;
     }
