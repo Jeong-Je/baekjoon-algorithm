@@ -1,59 +1,45 @@
 #include <iostream>
-#include <vector>
 #include <queue>
-
+#include <stdio.h>
+#include <cstring> // memset
+ 
 using namespace std;
-
-static int N, K;
-static bool visited[100001];
-static int dx[2] = {-1 ,1};
-
-void BFS(int start);
-
-int main(){
-    cin >> N >> K;
-    
-    BFS(N);
-    
-}
-
-
-void BFS(int start) {
-    priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int,int>>> pq;
-    pq.push({0, start});
-    
-    while(!pq.empty()){
-        int cnt = pq.top().first;
-        int now = pq.top().second;
-        pq.pop();
-        
-        if(visited[now]) continue;
-        visited[now] = true;
-        
-        if(now == K) {
-            cout << cnt;
-            return;
+ 
+#define MAX_SIZE 100000+1
+ 
+int N, K;
+bool visited[MAX_SIZE];
+ 
+int bfs() {
+    priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> q;
+    q.push({ 0, N });
+    visited[N] = true;
+    while (!q.empty()) {
+        int time = q.top().first;
+        int x = q.top().second;
+        q.pop();
+ 
+        if (x == K) return time;
+ 
+        if (x * 2 < MAX_SIZE && !visited[x * 2]) {
+            q.push({ time, x * 2 });
+            visited[x * 2] = true;
         }
-        
-        
-        for(int i=0;i<3;i++){
-            int next_x;
-            if(i==2) {
-                next_x = now * 2;
-            } else {
-                next_x = now + dx[i];
-            }
-            
-            
-            if(next_x > -1 && next_x <100001 && !visited[next_x]) {
-                if(i==2){
-                    pq.push({cnt, next_x});
-                } else {
-                    pq.push({cnt + 1, next_x});
-                }
-            }
-            
+ 
+        if (x + 1 < MAX_SIZE && !visited[x + 1]) {
+            q.push({ time + 1, x + 1 });
+            visited[x + 1] = true;
         }
-        
+ 
+        if (x - 1 >= 0 && !visited[x - 1]) {
+            q.push({ time + 1 , x - 1 });
+            visited[x - 1] = true;
+        }
     }
+}
+ 
+int main() {
+    scanf("%d %d", &N, &K);
+    printf("%d\n", bfs());
+    return 0;
 }
