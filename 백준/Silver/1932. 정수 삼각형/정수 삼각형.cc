@@ -20,7 +20,7 @@ int main(){
             if(j==0) {
                 dp[i][j] = dp[i-1][0] + dp[i][j];
             } else if (i==j) {
-                dp[i][j] = dp[i-1][j-1] + dp[i][j];
+                dp[i][j] = dp[i-1][i-1] + dp[i][j];
             } else {
                 dp[i][j] = max(dp[i-1][j-1] + dp[i][j], dp[i-1][j] + dp[i][j]);
             }
