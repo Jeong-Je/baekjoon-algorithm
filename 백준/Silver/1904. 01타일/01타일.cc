@@ -2,9 +2,7 @@
 
 using namespace std;
 
-using ll = long long;
-
-static ll dp[1000001];
+static int dp[1000001];
 
 int main(){
     int N;
