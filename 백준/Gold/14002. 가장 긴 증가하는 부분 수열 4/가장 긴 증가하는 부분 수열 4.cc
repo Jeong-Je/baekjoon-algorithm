@@ -7,7 +7,7 @@ using namespace std;
 static int arr[1001];
 static vector<vector<int>> result(1001);
 
-bool cmp(vector<int> &a, vector<int> &b) {
+bool cmp(vector<int> a, vector<int> b) {
     return a.size() > b.size();
 }
 
@@ -30,11 +30,17 @@ int main(){
         }
     }
     
-    sort(result.begin() + 1, result.begin() + N + 1, cmp);
+    int maxIndex = 1;
+    for(int i=2;i<=N;i++){
+        if(result[maxIndex].size() < result[i].size()) {
+            maxIndex = i;
+        }
+    }
     
-    cout << result[1].size() << "\n";
+    int size = result[maxIndex].size();
+    cout << size << "\n";
     
-    for(int i=0;i<result[1].size();i++){
-        cout << result[1][i] << " ";
+    for(int i=0;i<size;i++){
+        cout << result[maxIndex][i] << " ";
     }
 }
