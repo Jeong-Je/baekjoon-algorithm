@@ -1,28 +1,30 @@
-// 11047
-
 #include <iostream>
 #include <vector>
+
 using namespace std;
 
-int main() {
-	ios::sync_with_stdio(false);
-	cin.tie(NULL);
-	int n, k, coin, result=0;
-	vector<int> v;
-	cin >> n >> k;
-	while (n--) {
-		cin >> coin;
-		if (coin > k)
-			continue;
-		v.push_back(coin);
-	}
-	for (int i = v.size()-1; i>-1; i--) {
-		if (v.at(i) > k)continue;
-		result += k / v.at(i);
-		k %= v.at(i);
-		if (k == 0)break;
-	}
+int main(){
+    int N, K;
+    cin >> N >> K;
+    
+    vector<int> v(N+1);
+    
+    for(int i=1;i<=N;i++){
+        cin >> v[i];
+    }
+    
+    int count = 0;
+    int i = N;
+    while(K){
+        if(v[i] > K) {
+            i--;
+            continue;
+        }
 
-	cout << result;
-	return 0;
+        count += K / v[i];
+        K %= v[i];
+    }
+    
+    
+    cout << count;
 }
