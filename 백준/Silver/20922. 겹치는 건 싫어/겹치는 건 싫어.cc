@@ -25,11 +25,11 @@ int main(){
         if(check[v[right]] < K) { // 같은 정수가 K개 미만 
             check[v[right]]++;
         } else { // 같은 정수가 K개 이상 
-            while(check[v[right]] >= K) {
+            while(v[left] != v[right]) {
                 check[v[left]]--;
                 left++;
             }
-            check[v[right]]++;
+            left++;
         }
         
         int tmp = right - left + 1;
