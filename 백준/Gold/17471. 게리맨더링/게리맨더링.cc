@@ -86,8 +86,6 @@ void DFS(int x, int cnt)
 
 bool is_connect(vector<int>& group)
 {
-    if(group.empty()) return false;
-    
     vector<bool> visited(N+1, false);
     
     queue<int> q;
