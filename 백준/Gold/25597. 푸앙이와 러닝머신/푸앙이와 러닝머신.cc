@@ -41,7 +41,7 @@ int main()
     // 2-1. 1미터랑 4미터 조합 확인하기
     four_meter_time = X / 4; // 4미터 속도로 달리는 시간 
     remain = X % 4;          // 1미터 속도로 달리는 시간 
-    if(four_meter_time > 0 && four_meter_time + remain <= T)
+    if(four_meter_time + remain <= T)
     {
         int start_time = T - (four_meter_time + remain);
         cout << "2\n";
@@ -54,7 +54,7 @@ int main()
     // 2-2. 1미터랑 8미터 조합 확인하기 
     eight_meter_time = X / 8; // 8미터 속도로 달리는 시간 
     remain = X % 8;           // 1미터 속도로 달리는 시간 
-    if(eight_meter_time > 0 && eight_meter_time + remain <= T)
+    if(eight_meter_time + remain <= T)
     {
         int start_time = T - (eight_meter_time + remain);
         cout << "2\n";
@@ -67,8 +67,7 @@ int main()
     // 2-3. 4미터랑 8미터 조합 확인하기 
     eight_meter_time = X / 8;
     four_meter_time = (X % 8) / 4;
-    if(eight_meter_time > 0 && four_meter_time > 0)
-    {
+
         // 아래 식이 나누어 떨어져야 4미터 8미터 조합 가능 
         if((X % 8) % 4 == 0)
         {
@@ -81,7 +80,7 @@ int main()
                 return 0;
             }
         }        
-    }
+
     
     
     /////////////////////////////////////////////////////////////////////////
@@ -90,8 +89,7 @@ int main()
     four_meter_time = (X % 8) / 4;
     remain = (X % 8) % 4;
     
-    if(eight_meter_time && four_meter_time && remain)
-    {
+
         if(eight_meter_time + four_meter_time + remain <= T)
         {
             int start_time = T - (eight_meter_time + four_meter_time + remain);
@@ -101,8 +99,8 @@ int main()
             cout << start_time + eight_meter_time + four_meter_time << " 1\n";
             return 0;
         }
-    }
     
+
     
     /////////////////////////////////////////////////////////////////////////
     // 4. 모든 경우가 불가능한 경우 
