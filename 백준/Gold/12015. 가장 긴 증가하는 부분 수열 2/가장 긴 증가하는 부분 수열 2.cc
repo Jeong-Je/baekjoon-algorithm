@@ -23,7 +23,7 @@ int binary(int key)
             right = mid;
         }
     }
-    return right;
+    return left;
 }
 
 int main()
