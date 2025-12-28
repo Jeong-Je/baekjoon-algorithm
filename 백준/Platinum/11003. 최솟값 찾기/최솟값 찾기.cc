@@ -3,32 +3,31 @@
 
 using namespace std;
 
-typedef pair<int, int> node;
+typedef pair<int, int> pii;
 
-int main()
-{
+int main() {
     ios::sync_with_stdio(false);
-    cin.tie(NULL);
-    cout.tie(NULL);
+    cin.tie(nullptr);
+    
+    int N, L;
+    cin >> N >> L;
 
-    int n, l;
-    cin >> n >> l;
-    deque<node> dq;
+    deque<pii> dq;
 
-    for (int i = 0; i < n; i++) {
+    for (int i = 0; i < N; i++) {
         int now;
         cin >> now;
 
-        // 제일 작은 수를 앞에 두겠어
-        while (dq.size() && dq.back().first >= now)
+        while (dq.size() && dq.back().first >= now) {
             dq.pop_back();
+        }
 
-        dq.push_back(node(now, i));
+        dq.push_back({now, i});
 
-        if (dq.front().second <= i - l)
+        if (dq.front().second <= i - L) {
             dq.pop_front();
+        }
 
-        cout << dq.front().first << " ";
+        cout << dq.front().first << ' ';
     }
-
 }
