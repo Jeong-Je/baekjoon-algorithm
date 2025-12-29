@@ -1,34 +1,42 @@
-// 4949
-
 #include <iostream>
 #include <stack>
-#include <string>
-#include <ctype.h>
-using namespace std;
-int main() {
-	while (1) {
-		string s;
-		stack<char> stack;
-		getline(cin, s);
-		if (s == ".")break;
-		bool flag = 1;
-		for (int i = 0; i < s.size() - 1 ; i++) {
-			if (s[i] == '(' || s[i] == '[')stack.push(s[i]);
-			else if (!stack.empty() && s[i] == ')' && stack.top() == '(')stack.pop();
-			else if (!stack.empty() && s[i] == ']' && stack.top() == '[')stack.pop();
-			else if (isalpha(s[i]) || s[i] == ' ') continue;
-			else {
-				flag = 0;
-				break;
-			}
-		}
 
-		if (flag && stack.empty()) {
-			cout << "yes\n";
-		}
-		else {
-			cout << "no\n";
-		}
-	}
-	return 0;
+using namespace std;
+
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(NULL);
+
+    while (true) {
+        string s;
+        stack<char> stk;
+
+        getline(cin, s);
+        bool isBalance = true;
+
+        if (s == ".") break;
+
+        for (int i=0;i<s.size()-1;i++) {
+            if (s[i] == '(' || s[i] == '[') stk.push(s[i]);
+            else if (s[i] == ')' || s[i] == ']') {
+                if (stk.empty()) isBalance = false;
+                else {
+                    if (s[i] == ')' && stk.top() == '(') {
+                        stk.pop();
+                    } else if (s[i] == ']' && stk.top() == '[') {
+                        stk.pop();
+                    } else {
+                        isBalance = false;
+                    }
+                }
+            }
+        }
+
+        if (isBalance && stk.empty()) {
+            cout << "yes\n";
+        }else {
+            cout << "no\n";
+        }
+    }
+
 }
