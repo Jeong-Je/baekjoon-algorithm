@@ -1,70 +1,80 @@
-/******************************************************************************
-
-                              Online C++ Compiler.
-               Code, Compile, Run and Debug C++ program online.
-Write your code in this editor and press "Run" button to compile and execute it.
-
-*******************************************************************************/
-
 #include <iostream>
-#include <algorithm>
-#include <vector>
+#include <queue>
 
 using namespace std;
 
-static int map[26][26];
-static int N;
-static bool visited[26][26];
-static vector<int> result;
+int N;
 
-void DFS(int i, int j);
+int map[25][25];
+bool visited[25][25];
 
-int cnt;
+int dr[4] = { -1, 1, 0, 0 };
+int dc[4] = { 0, 0, -1, 1 };
 
-int mx[4] = {1, -1, 0, 0};
-int my[4] = {0, 0, 1, -1};
+priority_queue<int, vector<int>, greater<int>> pq;
 
-int main(){
-    
+void bfs(int i, int c);
+
+int main() {
+
     cin >> N;
-    
-    for(int i=1;i<=N;i++){
-        for(int j=1;j<=N;j++){
+
+    for (int i = 0; i < N; i++)
+    {
+        for (int j = 0; j < N; j++)
+        {
             scanf("%1d", &map[i][j]);
         }
     }
-    
-    for(int i=1;i<=N;i++){
-        for(int j=1;j<=N;j++){
-            if(!visited[i][j] && map[i][j]){
-                cnt = 0;
-                DFS(i, j);
-                result.push_back(cnt);
+
+    for (int i = 0; i < N; i++)
+    {
+        for (int j = 0; j < N; j++)
+        {
+            if (map[i][j] == 1 && visited[i][j] == false)
+            {
+                bfs(i, j);
             }
         }
     }
-    
-    sort(result.begin(), result.end());
-    
-    cout << result.size() << "\n";
-    for(int i=0;i<result.size();i++){
-        cout << result[i] << "\n";
+
+    cout << pq.size() << '\n';
+
+    while (!pq.empty())
+    {
+        cout << pq.top() << '\n';
+        pq.pop();
     }
 }
 
-void DFS(int i, int j){
+
+void bfs(int i, int j)
+{
+    int size = 1;
+    queue<pair<int, int>> q;
+    q.push({ i, j });
     visited[i][j] = true;
-    cnt++;
-    for(int k=0;k<4;k++){
-        
-        int next_x = i + mx[k];
-        int next_y = j + my[k];
-        
-        if(next_x > 0 && next_x <= N && next_y > 0 && next_y <= N){
-            if(!visited[next_x][next_y] && map[next_x][next_y]){
-                visited[next_x][next_y] = true;
-                DFS(next_x, next_y);
-            }
+
+    while (!q.empty())
+    {
+        auto [r, c] = q.front();
+        q.pop();
+
+        for (int d = 0; d < 4; d++)
+        {
+            int nr = r + dr[d];
+            int nc = c + dc[d];
+
+            if (nr < 0 || nr >= N || nc < 0 || nc >= N) continue;
+            if (map[nr][nc] != 1 || visited[nr][nc]) continue;
+
+            size += 1;
+
+            visited[nr][nc] = true;
+
+            q.push({ nr, nc });
         }
     }
+
+    pq.push(size);
 }
